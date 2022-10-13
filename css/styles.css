@@ -7,6 +7,8 @@
       --medium-text: 16px;
       --gaps-small: 30px;
       --gaps-medium: 50px;
+      --time-style: cubic-bezier(0.4, 0, 0.2, 1);
+      --duration: 250ms;
 }
 
 *,
@@ -83,6 +85,8 @@ img {
       font-family: inherit;
       border-radius: 4px;
       border: hidden;
+      box-shadow:0;
+      transition: box-shadow var(--duration) var(--time-style), background-color var(--duration) var(--time-style), color var(--duration) var(--time-style);
 }
 
 .btn:hover,
@@ -91,23 +95,12 @@ img {
       background-color: var(--zeema-blue);
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
       cursor: pointer;
+      
 }
 
-.link.header-link.current {
-      color: var(--zeema-blue)
+.header-link.current {
+      color: var(--zeema-blue);
 }
-
-/* .current-page::after {
-      display: block;
-      content: '';
-      width: 100%;
-      height: 4px;
-      border-radius: 2px;
-      background-color: var(--zeema-blue);
-      position: relative;
-      top: 31px;
-} */
-
 .header-link.current::after {
       display: block;
       content: '';
@@ -115,8 +108,9 @@ img {
       height: 4px;
       border-radius: 2px;
       background-color: var(--zeema-blue);
-      position: relative;
-      top: 31px;
+      
+      opacity: 1;
+      transform: none;
 }
 
 /*---------------Menu-----------------*/
@@ -140,6 +134,10 @@ img {
       align-items: center;
 }
 
+.header-link-list {
+      column-gap: var(--gaps-medium);
+}
+
 .header-link {
       font-weight: 500;
       font-size: var(--small-text);
@@ -147,10 +145,33 @@ img {
       letter-spacing: 0.02em;
       color: inherit;
       padding: 32px 0;
+      /* position: relative; */
+      transition:color var(--duration) var(--time-style);
+}
+.header-link::after {
+      display: block;
+      content: '';
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background-color: var(--zeema-blue);
+      position: relative;
+      top: 31px;
+      opacity: 0;
+      transform: rotateY(-90deg);
+      transition: opacity var(--duration) var(--time-style), transform var(--duration) var(--time-style);
 }
 
-.header-link-list {
-      column-gap: var(--gaps-medium);
+
+.header-link:hover,
+.header-link:focus {
+      color: var(--zeema-blue);
+}
+
+.header-link:hover::after,
+.header-link:focus::after {
+      transform: rotateY(0deg);
+      opacity: 1;
 }
 
 /* .header-link-list li:nth-child(n+2) {
@@ -160,11 +181,6 @@ img {
 /* .header-link-list li:first-child {
       margin-left: 0;
 } */
-
-.header-link:hover,
-.header-link:focus {
-      color: var(--zeema-blue);
-}
 
 .header-contacts-list {
       align-items: center;
@@ -185,6 +201,7 @@ img {
       padding: 32px 0;
       display: flex;
       align-items: center;
+      transition: color var(--duration) var(--time-style);
 }
 
 .header-contacts-link:hover,
@@ -201,14 +218,12 @@ img {
       fill: currentColor
 }
 
-/*-------------Contacts---------------*/
+/*-------------Footer---------------*/
 
 .footer {
       background-color: var(--dark-theme);
       padding: 60px 0;
 }
-
-/* height: 252px; */
 
 .footer-container {
       display: flex;
@@ -248,6 +263,7 @@ img {
       border-radius: 50%;
       width: 44px;
       height: 44px;
+      transition: background-color var(--duration) var(--time-style);
 
 }
 
@@ -259,10 +275,13 @@ img {
 .socials-link {
       width: 100%;
       height: 100%;
-      fill: var(--color-white);
+      color: var(--color-white);
       display: flex;
       align-items: center;
       justify-content: center;
+}
+.socials-link svg {
+      fill: currentColor;
 }
 
 .adress-map {
@@ -275,6 +294,7 @@ img {
       font-style: normal;
       line-height: 1.71;
       color: rgba(255, 255, 255, 0.6);
+      transition: color var(--duration) var(--time-style);
 }
 
 .adress-link:hover,
@@ -324,7 +344,7 @@ img {
       top: 50%;
       left: 50%;
       transform: translate(-50%,-48.5%) scale(1);
-      transition: transform 250ms;
+      transition: transform var(--duration);
       transition-timing-function:cubic-bezier(.89, .01, .45, .99);
 }
 /* cubic-bezier(.74, .01, .7, 1) cubic-bezier(.7, -0.01, .56, 1) cubic-bezier(.67, 0, .78, .47) cubic-bezier(.77, 0, .45, .99) */
@@ -338,12 +358,6 @@ img {
       transform: scale(1) translate(110%,15.6%);
 } */
 
-/* animation-name: modal;
-      animation-duration: 1000ms;
-      animation-timing-function: ease;
-      animation-delay: 2000ms;
-      animation-iteration-count: 1;
-      animation-fill-mode: backwards; */
 @keyframes modal {
       0% {
             opacity:0;
@@ -353,7 +367,6 @@ img {
             opacity:1;
             transform: scale(1) translate(110%,15.6%);
       }
-
 }
 
 .backdrop.is-hidden .modal-close {
@@ -387,19 +400,21 @@ img {
 .modal-close:focus svg {
       fill: currentColor;
 }
+
 /* ----------------------------HOME---------------------------*/
 
 .hero {
       padding: 200px 0;
       text-align: center;
       background-image: linear-gradient(rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4)), url("../images/teamwork-day.jpg");
-      background-position: center;
+      
       max-width: 1600px;
       margin: auto;
       background-size: cover;
       background-color: var(--dark-theme);
+      
 }
-
+/* border-top: 1px solid #ECECEC; */
 .hero-title {
       text-transform: uppercase;
       font-weight: 900;
@@ -420,6 +435,8 @@ img {
       color: var(--color-white);
       width: 216px;
       height: 50px;
+      
+      transition: background-color var(--duration) var(--time-style);
 }
 
 .hero-btn:hover,
@@ -558,6 +575,7 @@ img {
       align-items: center;
       justify-content: center;
       color: #AFB1B8;
+      transition: color var(--duration) var(--time-style), background-color var(--duration) var(--time-style) ;
 }
 .member-social-link svg {
       fill: currentColor;
@@ -580,7 +598,7 @@ img {
       height: 92px;
       border: 1px solid #AFB1B8;
       border-radius: 4px;
-
+      transition: border 250ms var(--time-style);
 }
 
 .clients li:hover,
@@ -596,6 +614,7 @@ img {
       justify-content: center;
       margin: auto;
       color: #AFB1B8;
+      transition: color var(--duration) var(--time-style);
 }
 
 .client-link svg {
@@ -640,11 +659,14 @@ img {
       width: 370px;
       background: var(--color-white);
       border: 1px solid #EEEEEE;
-}
-.project-link {
       
+}
+
+.project-link {
+      transition: box-shadow var(--duration) var(--time-style);
       overflow: hidden;
 }
+
 .project-link:hover,
 .project-link:focus {
       display:block;
@@ -673,9 +695,7 @@ img {
       top: 0;
       left: 0;
       transform: translatey(100%);
-      transition-property: transform;
-      transition-duration:250ms;
-      transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform var(--duration) var(--time-style);
 }
 
 .project-link:hover .overlay,
