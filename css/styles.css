@@ -259,17 +259,9 @@ img {
 }
 
 .socials-list li {
-      background-color: rgba(256, 256, 256, 0.1);
-      border-radius: 50%;
+      
       width: 44px;
       height: 44px;
-      transition: background-color var(--duration) var(--time-style);
-
-}
-
-.socials-list li:hover,
-.socials-list li:focus {
-      background-color: var(--zeema-blue);
 }
 
 .socials-link {
@@ -279,9 +271,17 @@ img {
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 50%;
+      background-color: rgba(256, 256, 256, 0.1);
+      transition: background-color var(--duration) var(--time-style);
 }
 .socials-link svg {
       fill: currentColor;
+}
+
+.socials-link:hover,
+.socials-link:focus {
+      background-color: var(--zeema-blue);
 }
 
 .adress-map {
@@ -596,14 +596,8 @@ img {
 .clients li {
       width: 170px;
       height: 92px;
-      border: 1px solid #AFB1B8;
-      border-radius: 4px;
-      transition: border 250ms var(--time-style);
-}
-
-.clients li:hover,
-.clients li:focus {
-      border: 1px solid var(--zeema-blue);
+      
+      
 }
 
 .client-link {
@@ -613,8 +607,11 @@ img {
       align-items: center;
       justify-content: center;
       margin: auto;
+
+      border: 1px solid #AFB1B8;
+      border-radius: 4px;
       color: #AFB1B8;
-      transition: color var(--duration) var(--time-style);
+      transition: color var(--duration) var(--time-style), border 250ms var(--time-style);
 }
 
 .client-link svg {
@@ -623,6 +620,7 @@ img {
 
 .client-link:hover,
 .client-link:focus {
+      border: 1px solid var(--zeema-blue);
       color: var(--zeema-blue);
 }
 
@@ -652,26 +650,23 @@ img {
 .project-list {
       flex-wrap: wrap;
       gap: var(--gaps-small);
-
 }
 
 .project-list .project {
       width: 370px;
       background: var(--color-white);
-      border: 1px solid #EEEEEE;
-      
 }
 
 .project-link {
+      width: 100%;
+      height: 100%;
+      display:block;
+      border: 1px solid #EEEEEE;
       transition: box-shadow var(--duration) var(--time-style);
-      overflow: hidden;
 }
 
 .project-link:hover,
 .project-link:focus {
-      display:block;
-      width: 100%;
-      height: 100%;
       box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12),
             0px 4px 4px rgba(0, 0, 0, 0.06),
             1px 4px 6px rgba(0, 0, 0, 0.16);
@@ -705,7 +700,6 @@ img {
 
 .project-about {
       padding: 20px 24px;
-      z-index: 2;
 }
 
 .project-title {
